@@ -1,57 +1,56 @@
 import React, { useEffect, useState } from "react";
-import Grid from "@material-ui/core/Grid";
+import { group } from "d3-array";
+
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+
 import Main from "./Main";
 
-let grpcFiles = [
+let files = [
   "example-grpc-in-4000",
   "example-grpc-out-4000",
   "example-grpc-in-6000",
-  "example-grpc-out-6000"
-];
-
-let http1 = [
+  "example-grpc-out-6000",
   "example-http1-in-4000",
   "example-http1-out-4000",
   "example-http1-in-7000",
   "example-http1-out-7000"
 ];
 
-let fetchData = async files => {
-  const allRequests = files.map(file =>
-    fetch(`/data/${file}.json`)
-      .then(response => response.json())
-      .then(data => {
-        return { name: file.replace("example-", ""), report: data };
-      })
-  );
+let getReport = async fname => ({
+  key: fname.split("-", 2)[1],
+  name: fname
+    .split("-")
+    .reverse()
+    .slice(0, 2)
+    .reverse()
+    .join("-"),
+  report: await (await fetch(`/data/${fname}.json`)).json()
+});
 
-  return Promise.all(allRequests);
-};
-
-function App() {
-  const [grpcReports, setGrpcReports] = useState(null);
-  const [http1Reports, setHttp1Reports] = useState(null);
+export default () => {
+  const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetchData(grpcFiles).then(grpcArray => {
-      setGrpcReports(grpcArray);
-    });
-
-    fetchData(http1).then(http1Array => {
-      setHttp1Reports(http1Array);
-    });
+    Promise.all(files.map(getReport)).then(setReports);
   }, []);
 
   return (
-    <Grid container direction="column">
-      <Grid item xs>
-        {grpcReports && <Main reports={grpcReports} />}
-      </Grid>
-      <Grid item xs>
-        {http1Reports && <Main reports={http1Reports} />}
-      </Grid>
-    </Grid>
+    <React.Fragment>
+      <CssBaseline />
+      <Container>
+        <GridList>
+          {Array.from(group(reports, r => r.key).values()).map(section => (
+            <GridListTile cols={12} key={section[0].key}>
+              <GridListTileBar title={section[0].key} />
+              <Main reports={section} />
+            </GridListTile>
+          ))}
+        </GridList>
+      </Container>
+    </React.Fragment>
   );
-}
-
-export default App;
+};
