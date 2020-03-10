@@ -1,0 +1,123 @@
+{
+  "RunType": "GRPC Health PayloadLength=200",
+  "Labels": "ver-cache-and-buffer 2020Mar07_17h43m53s Iter: 1 Dur: 10s Conns: 4 Streams: 4",
+  "StartTime": "2020-03-07T17:45:52.552904516Z",
+  "RequestedQPS": "4000",
+  "RequestedDuration": "10s",
+  "ActualQPS": 3998.759420478755,
+  "ActualDuration": 10003102411,
+  "NumThreads": 16,
+  "Version": "1.3.2-pre",
+  "DurationHistogram": {
+    "Count": 40000,
+    "Min": 0.000408537,
+    "Max": 0.011238299,
+    "Sum": 116.36024683199999,
+    "Avg": 0.0029090061707999996,
+    "StdDev": 0.0013890823269063393,
+    "Data": [
+      {
+        "Start": 0.000408537,
+        "End": 0.001,
+        "Percent": 0.08,
+        "Count": 32
+      },
+      {
+        "Start": 0.001,
+        "End": 0.002,
+        "Percent": 29.685,
+        "Count": 11842
+      },
+      {
+        "Start": 0.002,
+        "End": 0.003,
+        "Percent": 62.955,
+        "Count": 13308
+      },
+      {
+        "Start": 0.003,
+        "End": 0.004,
+        "Percent": 81.945,
+        "Count": 7596
+      },
+      {
+        "Start": 0.004,
+        "End": 0.005,
+        "Percent": 91.67,
+        "Count": 3890
+      },
+      {
+        "Start": 0.005,
+        "End": 0.006,
+        "Percent": 95.9675,
+        "Count": 1719
+      },
+      {
+        "Start": 0.006,
+        "End": 0.007,
+        "Percent": 98.225,
+        "Count": 903
+      },
+      {
+        "Start": 0.007,
+        "End": 0.008,
+        "Percent": 99.335,
+        "Count": 444
+      },
+      {
+        "Start": 0.008,
+        "End": 0.009000000000000001,
+        "Percent": 99.8275,
+        "Count": 197
+      },
+      {
+        "Start": 0.009000000000000001,
+        "End": 0.01,
+        "Percent": 99.98,
+        "Count": 61
+      },
+      {
+        "Start": 0.01,
+        "End": 0.011,
+        "Percent": 99.9925,
+        "Count": 5
+      },
+      {
+        "Start": 0.011,
+        "End": 0.011238299,
+        "Percent": 100,
+        "Count": 3
+      }
+    ],
+    "Percentiles": [
+      {
+        "Percentile": 50,
+        "Value": 0.0026106101593026754
+      },
+      {
+        "Percentile": 75,
+        "Value": 0.0036342812006319117
+      },
+      {
+        "Percentile": 90,
+        "Value": 0.00482827763496144
+      },
+      {
+        "Percentile": 99,
+        "Value": 0.007698198198198204
+      },
+      {
+        "Percentile": 99.9,
+        "Value": 0.009475409836065598
+      }
+    ]
+  },
+  "Exactly": 0,
+  "Jitter": false,
+  "RetCodes": {
+    "SERVING": 40000
+  },
+  "Destination": "http://proxy:4140",
+  "Streams": 4,
+  "Ping": false
+}
